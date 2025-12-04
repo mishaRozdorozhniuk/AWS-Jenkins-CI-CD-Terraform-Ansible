@@ -1,0 +1,25 @@
+.terraform/
+
+# Terraform state
+terraform.tfstate
+terraform.tfstate.backup
+**/*.tfstate
+**/*.tfstate.backup
+.crash.log
+crash.*.log
+
+# Local overrides
+*.tfvars
+*.tfvars.json
+
+# IDE / OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Ansible
+*.retry
+
+# Python / misc
+__pycache__/
+*.pyc
