@@ -62,3 +62,9 @@ variable "max_spot_price" {
   type        = number
   default     = 0.05
 }
+
+variable "s3_bucket_name" {
+  description = "Name of the S3 bucket"
+  type        = string
+  default     = "jenkins-ansible-terraform-bucket-mykhailo-v1"
+}

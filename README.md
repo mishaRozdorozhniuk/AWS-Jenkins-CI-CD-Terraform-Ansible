@@ -36,19 +36,29 @@ The public key path is referenced in Terraform `user_data` and `aws_key_pair`, a
 
 This project uses **remote state** stored in an S3 bucket to keep Terraform state file centralized and persistent.
 
-- Bucket: `terraform-state-s3-22`
+**Update:** The S3 bucket is now provisioned by Terraform itself (`s3.tf`), ensuring the infrastructure code is self-contained.
+
+- Bucket: `jenkins-ansible-terraform-bucket-mykhailo-v1`
 - Region: `eu-central-1`
 - Terraform backend configuration (in `terraform.tf`):
 
 ```hcl
 backend "s3" {
-  bucket = "terraform-state-s3-22"
+  bucket = "jenkins-ansible-terraform-bucket-mykhailo-v1"
   region = "eu-central-1"
   key    = "terraform-jenkins-ansible/terraform.tfstate"
 }
 ```
 
 Terraform automatically reads and writes the state file `terraform.tfstate` under the `terraform-jenkins-ansible/` prefix in this bucket.
+
+**Important: Initial Setup (Chicken and Egg problem)**
+Since the S3 bucket is used for the backend but is also created by Terraform, you must follow a specific process for the very first deployment:
+
+1. **Comment out** the `backend "s3"` block in `terraform.tf`.
+2. Run `terraform init` and `terraform apply` to create the bucket (and other resources).
+3. **Uncomment** the `backend "s3"` block in `terraform.tf`.
+4. Run `terraform init` again. Terraform will ask to copy the local state to the new S3 bucket. Type **yes**.
 
 ### 1.3. VPC and Networking
 

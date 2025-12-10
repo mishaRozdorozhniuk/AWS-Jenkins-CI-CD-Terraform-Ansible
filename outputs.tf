@@ -13,3 +13,7 @@ output "vpc_id" {
 output "jenkins_master_sg_id" {
   value = aws_security_group.jenkins_master_sg.id
 }
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.my_bucket.bucket
+}

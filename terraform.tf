@@ -7,7 +7,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "terraform-state-s3-22"
+    bucket = "jenkins-ansible-terraform-bucket-mykhailo-v1"
     region = "eu-central-1"
     key    = "terraform-jenkins-ansible/terraform.tfstate"
   }
